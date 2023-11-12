@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+#连接数据库的信息
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/orderget?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 98869771
+
+
+mybatis:
+  #  扫描映射文件
+  mapper-locations: classpath:mappers/*.xml
+  #  配置别名扫描的包
+  configuration:
+    #   开启驼峰映射配置
+    map-underscore-to-camel-case: true
+
+

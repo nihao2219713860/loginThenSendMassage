@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper文件相当于DAO接口的实现类，namespace属性的值就相当于StudentDAO的全限定名（包名加类名）-->
+<mapper namespace="com.example.orderget.mapper.SaleOrderMapper">
+<resultMap id="OrderAndLines" type="com.example.orderget.po.SaleOrderVO">
+    <id property="id" column="id"></id>
+    <result property="createdon" column="createdon"></result>
+    <result property="linenum" column="linenum"></result>
+    <result property="remark" column="remark"></result>
+    <collection property="saleorderlines"
+                ofType="com.example.orderget.po.SaleOrderLine"
+                column="id"
+                select="com.example.orderget.mapper.SaleOrderLineMapper.getOrderAndOrderLineByOrderId"></collection>
+</resultMap>
+    <select id="getOrderAndLinesById" resultMap="OrderAndLines">
+        select id, createdOn, lineNum, remark
+        from saleorder
+        where id=#{id};
+    </select>
+    <select id="getAllOrder" resultType="com.example.orderget.po.SaleOrder">
+        select id, createdOn, lineNum, remark
+        from saleorder;
+    </select>
+
+</mapper>
